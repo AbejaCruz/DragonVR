@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapons : MonoBehaviour {
     //Manos
-    GameObject rightHand, leftHand;
+    public GameObject rightHand, leftHand;
     //posiciones para los poderes 
     Vector3 lastPositionRight, lastPositionLeft;
     //gameboject para las armas y los pñuntos donde sale los poderes

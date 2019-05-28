@@ -163,6 +163,16 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3370c18187bb444b240cfb08dcc02f, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &139227813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 188906, guid: cb3370c18187bb444b240cfb08dcc02f,
+    type: 2}
+  m_PrefabInternal: {fileID: 139227812}
+--- !u!1 &139227814 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 156092, guid: cb3370c18187bb444b240cfb08dcc02f,
+    type: 2}
+  m_PrefabInternal: {fileID: 139227812}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +364,16 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88e8f15d4b1faa645821ca8ff73ed8e4, type: 2}
   m_IsPrefabAsset: 0
+--- !u!4 &582755355 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 402512, guid: 88e8f15d4b1faa645821ca8ff73ed8e4,
+    type: 2}
+  m_PrefabInternal: {fileID: 582755354}
+--- !u!1 &582755356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 138184, guid: 88e8f15d4b1faa645821ca8ff73ed8e4,
+    type: 2}
+  m_PrefabInternal: {fileID: 582755354}
 --- !u!1 &612856741 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 116882, guid: cb3370c18187bb444b240cfb08dcc02f,
@@ -611,6 +631,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 463184, guid: cb3370c18187bb444b240cfb08dcc02f,
     type: 2}
   m_PrefabInternal: {fileID: 139227812}
+--- !u!1 &1071909906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1071909907}
+  m_Layer: 0
+  m_Name: MagicSpot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1071909907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1071909906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.006, y: 2.854, z: -0.039}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 582755355}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1077550608
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,6 +741,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76950d2dbb27d74397d5e3b123f7b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightHand: {fileID: 139227814}
+  leftHand: {fileID: 139227813}
+  rightWeapon: {fileID: 1136768883}
+  leftWeapon: {fileID: 1778132049}
+  rightWeaponAlt: {fileID: 582755356}
+  magicLaunchPoint: {fileID: 1071909906}
+  fireMagic: {fileID: 0}
+  weaponCooldown: 0
+  magicCooldown: 0
+  shieldActive: 0
 --- !u!1001 &1136768882
 Prefab:
   m_ObjectHideFlags: 0
@@ -751,6 +809,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52dbcbba6ff81604aae0dac77c31e6d0, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1136768883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: 52dbcbba6ff81604aae0dac77c31e6d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1136768882}
 --- !u!1 &1366836476
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,3 +1030,8 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 337b9a8595c80834c9975492b52613be, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1778132049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000010501181352, guid: 337b9a8595c80834c9975492b52613be,
+    type: 2}
+  m_PrefabInternal: {fileID: 1778132048}
