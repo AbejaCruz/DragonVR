@@ -22,11 +22,33 @@ public class Weapons : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        rightWeaponAlt.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        weaponCooldown += Time.deltaTime;
+        magicCooldown += Time.deltaTime;
+
+        if (Input.GetAxis("HTC_VIU_LeftTrigger") > 0.1){
+            //TODO: gatillo izquierdo para cubrirnos con el escudo 
+
+        }
+        if (Input.GetAxis("HTC_VIU_RightTrigger") > 0.1)
+        {
+            //TODO: gatillo derecho dispara fuego si tenemos la vara seleccionada
+        }
+        if (Input.GetAxis("HTC_VIU_LeftGrip") > 0.1)
+        {
+            //TODO: mostrar/ocultar el escudo
+
+        }
+        if (Input.GetAxis("HTC_VIU_RightGrip") > 0.1)
+        {
+            //TODO: cambiar entre espada y vara
+
+
+        }
+
+    }
 }

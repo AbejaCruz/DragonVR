@@ -294,7 +294,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis1
+    m_Name: HTC_VIU_LeftTrackpadHorizontal
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -303,14 +303,14 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.001
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 2
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis2
+    m_Name: HTC_VIU_LeftTrackpadVertical
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -319,14 +319,14 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.001
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 2
     axis: 1
     joyNum: 0
   - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis3
+    m_Name: HTC_VIU_RightTrackpadHorizontal
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -335,30 +335,14 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 2
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis4
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 2
     axis: 3
     joyNum: 0
   - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis5
+    m_Name: HTC_VIU_RightTrackpadVertical
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -367,14 +351,14 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.001
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 4
     joyNum: 0
   - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis6
+    m_Name: HTC_VIU_LeftTrigger
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -383,62 +367,14 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 5
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis7
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 6
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis8
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 7
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis9
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 2
     axis: 8
     joyNum: 0
   - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis10
+    m_Name: HTC_VIU_RightTrigger
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -447,14 +383,14 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.001
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 2
     axis: 9
     joyNum: 0
   - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis11
+    m_Name: HTC_VIU_LeftGrip
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -463,14 +399,14 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.001
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 2
     axis: 10
     joyNum: 0
   - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis12
+    m_Name: HTC_VIU_RightGrip
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -479,249 +415,9 @@ InputManager:
     altPositiveButton: 
     gravity: 0
     dead: 0.001
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 2
     axis: 11
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis13
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 12
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis14
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 13
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis15
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 14
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis16
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 15
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis17
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 16
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis18
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 17
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis19
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 18
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis20
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 19
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis21
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 20
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis22
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 21
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis23
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 22
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis24
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 23
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis25
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 24
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis26
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 25
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: HTC_VIU_UnityAxis27
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: 
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 0
-    dead: 0.001
-    sensitivity: 5
-    snap: 0
-    invert: 0
-    type: 2
-    axis: 26
     joyNum: 0
