@@ -1,4 +1,4 @@
-﻿//========= Copyright 2016-2019, HTC Corporation. All rights reserved. ===========
+﻿//========= Copyright 2016-2018, HTC Corporation. All rights reserved. ===========
 
 using HTC.UnityPlugin.Utility;
 using HTC.UnityPlugin.VRModuleManagement;
@@ -59,10 +59,10 @@ namespace HTC.UnityPlugin.Vive
 
             private int updatedFrameCount = -1;
             private uint prevDeviceIndex;
+            private VRModuleDeviceModel trackedDeviceModel = VRModuleDeviceModel.Unknown;
 
-            private ulong prevButtonPressed;
-            private ulong currButtonPressed;
-            private VRModuleInput2DType currentInput2DType;
+            private uint prevButtonPressed;
+            private uint currButtonPressed;
 
             private readonly float[] prevAxisValue = new float[CONTROLLER_AXIS_COUNT];
             private readonly float[] currAxisValue = new float[CONTROLLER_AXIS_COUNT];
@@ -99,18 +99,12 @@ namespace HTC.UnityPlugin.Vive
                 // get device state
                 var currState = VRModule.GetCurrentDeviceState(deviceIndex);
 
-                // copy to previous states and reset current state
+                // copy to previous states
                 prevDeviceIndex = deviceIndex;
-
                 prevButtonPressed = currButtonPressed;
-                currButtonPressed = 0;
-                currentInput2DType = currState.input2DType;
+                for (int i = CONTROLLER_AXIS_COUNT - 1; i >= 0; --i) { prevAxisValue[i] = currAxisValue[i]; }
 
-                for (int i = CONTROLLER_AXIS_COUNT - 1; i >= 0; --i)
-                {
-                    prevAxisValue[i] = currAxisValue[i];
-                    currAxisValue[i] = 0f;
-                }
+                trackedDeviceModel = currState.deviceModel;
 
                 // update button states
                 EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.System, currState.GetButtonPress(VRModuleRawButton.System));
@@ -124,7 +118,6 @@ namespace HTC.UnityPlugin.Vive
                 EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.GripTouch, currState.GetButtonTouch(VRModuleRawButton.Grip));
                 EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.CapSenseGrip, currState.GetButtonPress(VRModuleRawButton.CapSenseGrip));
                 EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.CapSenseGripTouch, currState.GetButtonTouch(VRModuleRawButton.CapSenseGrip));
-                EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.ProximitySensor, currState.GetButtonPress(VRModuleRawButton.ProximitySensor));
                 EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.AKey, currState.GetButtonPress(VRModuleRawButton.A));
                 EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.AKeyTouch, currState.GetButtonTouch(VRModuleRawButton.A));
 
@@ -143,78 +136,10 @@ namespace HTC.UnityPlugin.Vive
                 currAxisValue[(int)ControllerAxis.RingCurl] = currState.GetAxisValue(VRModuleRawAxis.RingCurl);
                 currAxisValue[(int)ControllerAxis.PinkyCurl] = currState.GetAxisValue(VRModuleRawAxis.PinkyCurl);
 
-                switch (currentInput2DType)
-                {
-                    case VRModuleInput2DType.Unknown:
-                    case VRModuleInput2DType.TrackpadOnly:
-                        currAxisValue[(int)ControllerAxis.PadX] = currState.GetAxisValue(VRModuleRawAxis.TouchpadX);
-                        currAxisValue[(int)ControllerAxis.PadY] = currState.GetAxisValue(VRModuleRawAxis.TouchpadY);
-                        if (!VIUSettings.individualTouchpadJoystickValue)
-                        {
-                            currAxisValue[(int)ControllerAxis.JoystickX] = currState.GetAxisValue(VRModuleRawAxis.TouchpadX);
-                            currAxisValue[(int)ControllerAxis.JoystickY] = currState.GetAxisValue(VRModuleRawAxis.TouchpadY);
-                        }
-                        break;
-                    case VRModuleInput2DType.JoystickOnly:
-                        currAxisValue[(int)ControllerAxis.JoystickX] = currState.GetAxisValue(VRModuleRawAxis.TouchpadX);
-                        currAxisValue[(int)ControllerAxis.JoystickY] = currState.GetAxisValue(VRModuleRawAxis.TouchpadY);
-                        if (!VIUSettings.individualTouchpadJoystickValue)
-                        {
-                            currAxisValue[(int)ControllerAxis.PadX] = currState.GetAxisValue(VRModuleRawAxis.TouchpadX);
-                            currAxisValue[(int)ControllerAxis.PadY] = currState.GetAxisValue(VRModuleRawAxis.TouchpadY);
-                        }
-                        break;
-                    case VRModuleInput2DType.Both:
-                        currAxisValue[(int)ControllerAxis.PadX] = currState.GetAxisValue(VRModuleRawAxis.TouchpadX);
-                        currAxisValue[(int)ControllerAxis.PadY] = currState.GetAxisValue(VRModuleRawAxis.TouchpadY);
-                        currAxisValue[(int)ControllerAxis.JoystickX] = currState.GetAxisValue(VRModuleRawAxis.JoystickX);
-                        currAxisValue[(int)ControllerAxis.JoystickY] = currState.GetAxisValue(VRModuleRawAxis.JoystickY);
-                        break;
-                }
-
-                // update d-pad
-                var axis = new Vector2(currAxisValue[(int)ControllerAxis.PadX], currAxisValue[(int)ControllerAxis.PadY]);
-                var deadZone = VIUSettings.virtualDPadDeadZone;
-
-                if (axis.sqrMagnitude >= deadZone * deadZone)
-                {
-                    var padPress = GetPress(ControllerButton.Pad);
-                    var padTouch = GetPress(ControllerButton.PadTouch);
-
-                    var right = Vector2.Angle(Vector2.right, axis) < 45f;
-                    var up = Vector2.Angle(Vector2.up, axis) < 45f;
-                    var left = Vector2.Angle(Vector2.left, axis) < 45f;
-                    var down = Vector2.Angle(Vector2.down, axis) < 45f;
-
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadRight, padPress && right);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadUp, padPress && up);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadLeft, padPress && left);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadDown, padPress && down);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadRightTouch, padTouch && right);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadUpTouch, padTouch && up);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadLeftTouch, padTouch && left);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadDownTouch, padTouch && down);
-
-                    var upperRight = axis.x > 0f && axis.y > 0f;
-                    var upperLeft = axis.x < 0f && axis.y > 0f;
-                    var lowerLeft = axis.x < 0f && axis.y < 0f;
-                    var lowerRight = axis.x > 0f && axis.y < 0f;
-
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadUpperRight, padPress && upperRight);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadUpperLeft, padPress && upperLeft);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadLowerLeft, padPress && lowerLeft);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadLowerRight, padPress && lowerRight);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadUpperRightTouch, padTouch && upperRight);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadUpperLeftTouch, padTouch && upperLeft);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadLowerLeftTouch, padTouch && lowerLeft);
-                    EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.DPadLowerRightTouch, padTouch && lowerRight);
-                }
-
                 // update hair trigger
                 var currTriggerValue = currAxisValue[(int)ControllerAxis.Trigger];
 
-                EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.FullTrigger, currTriggerValue >= 0.99f);
-
+                EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.FullTrigger, currTriggerValue == 1f);
                 if (EnumUtils.GetFlag(prevButtonPressed, (int)ControllerButton.HairTrigger))
                 {
                     EnumUtils.SetFlag(ref currButtonPressed, (int)ControllerButton.HairTrigger, currTriggerValue >= (hairTriggerLimit - hairDelta) && currTriggerValue > 0.0f);
@@ -426,18 +351,19 @@ namespace HTC.UnityPlugin.Vive
                 ScrollType mode;
                 if (scrollType == ScrollType.Auto)
                 {
-                    switch (currentInput2DType)
+                    switch (trackedDeviceModel)
                     {
-                        case VRModuleInput2DType.Unknown:
-                        case VRModuleInput2DType.TouchpadOnly:
-                        case VRModuleInput2DType.Both:
-                            mode = ScrollType.Trackpad;
-                            break;
-                        case VRModuleInput2DType.ThumbstickOnly:
-                            mode = ScrollType.Thumbstick;
-                            break;
+                        case VRModuleDeviceModel.KnucklesLeft:
+                        case VRModuleDeviceModel.KnucklesRight:
+                        case VRModuleDeviceModel.ViveController:
+                        case VRModuleDeviceModel.DaydreamController:
+                        case VRModuleDeviceModel.ViveFocusFinch:
+                            mode = ScrollType.Trackpad; break;
+                        case VRModuleDeviceModel.OculusTouchLeft:
+                        case VRModuleDeviceModel.OculusTouchRight:
+                            mode = ScrollType.Thumbstick; break;
                         default:
-                            return Vector2.zero;
+                            mode = ScrollType.None; break;
                     }
                 }
                 else
@@ -474,7 +400,7 @@ namespace HTC.UnityPlugin.Vive
                             var currX = GetAxis(xAxis, false);
                             var currY = GetAxis(yAxis, false);
 
-                            scrollDelta = new Vector2(-currX, -currY) * 5f;
+                            scrollDelta = new Vector2(currX, currY) * 5f;
 
                             break;
                         }

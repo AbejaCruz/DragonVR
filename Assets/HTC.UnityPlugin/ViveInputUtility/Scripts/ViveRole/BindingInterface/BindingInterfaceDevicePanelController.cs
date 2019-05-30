@@ -1,4 +1,4 @@
-﻿//========= Copyright 2016-2019, HTC Corporation. All rights reserved. ===========
+﻿//========= Copyright 2016-2018, HTC Corporation. All rights reserved. ===========
 
 using HTC.UnityPlugin.Utility;
 using HTC.UnityPlugin.VRModuleManagement;
@@ -78,7 +78,7 @@ namespace HTC.UnityPlugin.Vive.BindingInterface
             m_inputDeviceSN.text = string.Empty;
             CheckInputDeviceSN(string.Empty);
 
-            for (uint deviceIndex = 0, imax = VRModule.GetDeviceStateCount(); deviceIndex < imax; ++deviceIndex)
+            for (uint deviceIndex = 0; deviceIndex < VRModule.MAX_DEVICE_COUNT; ++deviceIndex)
             {
                 if (VRModule.GetCurrentDeviceState(deviceIndex).isConnected)
                 {

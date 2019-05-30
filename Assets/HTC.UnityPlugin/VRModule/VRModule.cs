@@ -1,4 +1,4 @@
-﻿//========= Copyright 2016-2019, HTC Corporation. All rights reserved. ===========
+﻿//========= Copyright 2016-2018, HTC Corporation. All rights reserved. ===========
 
 using HTC.UnityPlugin.Utility;
 
@@ -88,8 +88,7 @@ namespace HTC.UnityPlugin.VRModuleManagement
 
         public static bool IsValidDeviceIndex(uint deviceIndex)
         {
-            if (!Active) { return false; }
-            return deviceIndex < Instance.GetDeviceStateLength();
+            return deviceIndex < MAX_DEVICE_COUNT;
         }
 
         public static bool HasInputFocus()
@@ -99,52 +98,34 @@ namespace HTC.UnityPlugin.VRModuleManagement
 
         public static bool IsDeviceConnected(string deviceSerialNumber)
         {
-            return (string.IsNullOrEmpty(deviceSerialNumber) || s_deviceSerialNumberTable == null) ? false : s_deviceSerialNumberTable.ContainsKey(deviceSerialNumber);
+            return s_deviceSerialNumberTable.ContainsKey(deviceSerialNumber);
         }
 
         public static uint GetConnectedDeviceIndex(string deviceSerialNumber)
         {
             uint deviceIndex;
-            if (string.IsNullOrEmpty(deviceSerialNumber) || s_deviceSerialNumberTable == null || !s_deviceSerialNumberTable.TryGetValue(deviceSerialNumber, out deviceIndex))
-            {
-                return INVALID_DEVICE_INDEX;
-            }
-            else
-            {
-                return deviceIndex;
-            }
+            if (s_deviceSerialNumberTable.TryGetValue(deviceSerialNumber, out deviceIndex)) { return deviceIndex; }
+            return INVALID_DEVICE_INDEX;
         }
 
         public static bool TryGetConnectedDeviceIndex(string deviceSerialNumber, out uint deviceIndex)
         {
-            if (string.IsNullOrEmpty(deviceSerialNumber) || s_deviceSerialNumberTable == null)
-            {
-                deviceIndex = INVALID_DEVICE_INDEX;
-                return false;
-            }
-            else
-            {
-                return s_deviceSerialNumberTable.TryGetValue(deviceSerialNumber, out deviceIndex);
-            }
+            return s_deviceSerialNumberTable.TryGetValue(deviceSerialNumber, out deviceIndex);
         }
-
-        public static uint GetDeviceStateCount() { return Instance == null ? 0u : Instance.GetDeviceStateLength(); }
 
         public static IVRModuleDeviceState GetCurrentDeviceState(uint deviceIndex)
         {
-            if (!IsValidDeviceIndex(deviceIndex) || Instance == null || Instance.m_currStates == null) { return s_defaultState; }
-            return Instance.m_currStates[deviceIndex] ?? s_defaultState;
+            return Instance == null || !IsValidDeviceIndex(deviceIndex) ? s_defaultState : Instance.m_currStates[deviceIndex];
         }
 
         public static IVRModuleDeviceState GetPreviousDeviceState(uint deviceIndex)
         {
-            if (!IsValidDeviceIndex(deviceIndex) || Instance == null || Instance.m_prevStates == null) { return s_defaultState; }
-            return Instance.m_prevStates[deviceIndex] ?? s_defaultState;
+            return Instance == null || !IsValidDeviceIndex(deviceIndex) ? s_defaultState : Instance.m_prevStates[deviceIndex];
         }
 
         public static IVRModuleDeviceState GetDeviceState(uint deviceIndex, bool usePrevious = false)
         {
-            return usePrevious ? GetPreviousDeviceState(deviceIndex) : GetCurrentDeviceState(deviceIndex);
+            return Instance == null || !IsValidDeviceIndex(deviceIndex) ? s_defaultState : (usePrevious ? Instance.m_prevStates[deviceIndex] : Instance.m_currStates[deviceIndex]);
         }
 
         public static uint GetLeftControllerDeviceIndex()
@@ -187,12 +168,32 @@ namespace HTC.UnityPlugin.VRModuleManagement
             }
         }
 
-        public static void TriggerHapticVibration(uint deviceIndex, float durationSeconds = 0.01f, float frequency = 85f, float amplitude = 0.125f, float startSecondsFromNow = 0f)
-        {
-            if (Instance != null && Instance.m_activatedModuleBase != null && IsValidDeviceIndex(deviceIndex))
-            {
-                Instance.m_activatedModuleBase.TriggerHapticVibration(deviceIndex, durationSeconds, frequency, amplitude, startSecondsFromNow);
-            }
-        }
+        public static readonly bool isSteamVRPluginDetected =
+#if VIU_STEAMVR
+            true;
+#else
+            false;
+#endif
+
+        public static readonly bool isOculusVRPluginDetected =
+#if VIU_OCULUSVR
+            true;
+#else
+            false;
+#endif
+
+        public static readonly bool isGoogleVRPluginDetected =
+#if VIU_GOOGLEVR
+            true;
+#else
+            false;
+#endif
+
+        public static readonly bool isWaveVRPluginDetected =
+#if VIU_WAVEVR
+            true;
+#else
+            false;
+#endif
     }
 }

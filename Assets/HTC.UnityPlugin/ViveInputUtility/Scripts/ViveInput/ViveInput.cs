@@ -1,4 +1,4 @@
-﻿//========= Copyright 2016-2019, HTC Corporation. All rights reserved. ===========
+﻿//========= Copyright 2016-2018, HTC Corporation. All rights reserved. ===========
 
 using HTC.UnityPlugin.Utility;
 using HTC.UnityPlugin.VRModuleManagement;
@@ -47,20 +47,14 @@ namespace HTC.UnityPlugin.Vive
         GripTouch = 9,
         CapSenseGrip = 10, // on:1.00 off:0.90 // Knuckles, Oculus Touch only
         CapSenseGripTouch = 11, // on:0.25 off:0.20 // Knuckles, Oculus Touch only
-        ProximitySensor = 15,
-        Bumper = 16,
-        BumperTouch = 17,
-        AKey = 12, // Knuckles(InnerFaceButton), Oculus Touch(RightHandA or LeftHandX pressed)
-        AKeyTouch = 13, // Knuckles(InnerFaceButton), Oculus Touch(RightHandA or LeftHandX touched)
+        AKey = 12, // Oculus Touch only, RightHandA or LeftHandX pressed
+        AKeyTouch = 13, // Oculus Touch only, RightHandA or LeftHandX touched
 
         // button alias
-        BKey = Menu,
-        BkeyTouch = MenuTouch,
         OuterFaceButton = Menu, // 7
         OuterFaceButtonTouch = MenuTouch, // 9
-        InnerFaceButton = AKey, // 12
-        InnerFaceButtonTouch = AKeyTouch, // 13
-
+        InnerFaceButton = Grip, // 2
+        InnerFaceButtonTouch = GripTouch, // 11
         [HideInInspector]
         Axis0 = Pad,
         [HideInInspector]
@@ -68,9 +62,9 @@ namespace HTC.UnityPlugin.Vive
         [HideInInspector]
         Axis2 = CapSenseGrip,
         [HideInInspector]
-        Axis3 = Bumper,
+        Axis3 = 14,
         [HideInInspector]
-        Axis4 = 18,
+        Axis4 = 15,
         [HideInInspector]
         Axis0Touch = PadTouch,
         [HideInInspector]
@@ -78,33 +72,13 @@ namespace HTC.UnityPlugin.Vive
         [HideInInspector]
         Axis2Touch = CapSenseGripTouch,
         [HideInInspector]
-        Axis3Touch = BumperTouch,
+        Axis3Touch = 16,
         [HideInInspector]
-        Axis4Touch = 19,
-        
+        Axis4Touch = 17,
+
         // virtual buttons
         HairTrigger = 5, // Pressed if trigger button is pressing, unpressed if trigger button is releasing
         FullTrigger = 6, // on:1.00 off:1.00
-
-        DPadLeft = 20,
-        DPadUp = 21,
-        DPadRight = 22,
-        DPadDown = 23,
-
-        DPadLeftTouch = 24,
-        DPadUpTouch = 25,
-        DPadRightTouch = 26,
-        DPadDownTouch = 27,
-
-        DPadUpperLeft = 28,
-        DPadUpperRight = 29,
-        DPadLowerRight = 30,
-        DPadLowerLeft = 31,
-
-        DPadUpperLeftTouch = 32,
-        DPadUpperRightTouch = 33,
-        DPadLowerRightTouch = 34,
-        DPadLowerLeftTouch = 35,
     }
 
     public enum ControllerAxis
@@ -118,9 +92,6 @@ namespace HTC.UnityPlugin.Vive
         MiddleCurl, // Knuckles only
         RingCurl, // Knuckles only
         PinkyCurl, // Knuckles only
-
-        JoystickX,
-        JoystickY,
     }
 
     public enum ScrollType
@@ -153,7 +124,7 @@ namespace HTC.UnityPlugin.Vive
         [SerializeField]
         private float m_clickInterval = 0.3f;
         [SerializeField]
-        private bool m_dontDestroyOnLoad = false;
+        private bool m_dontDestroyOnLoad = true;
         [SerializeField]
         private UnityEvent m_onUpdate = new UnityEvent();
 

@@ -1,13 +1,10 @@
-﻿//========= Copyright 2016-2019, HTC Corporation. All rights reserved. ===========
+﻿//========= Copyright 2016-2018, HTC Corporation. All rights reserved. ===========
 
 using HTC.UnityPlugin.Utility;
 using System.IO;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-#if VIU_STEAMVR_2_0_0_OR_NEWER
-using Valve.VR;
-#endif
 
 namespace HTC.UnityPlugin.Vive.ExCamConfigInterface
 {

@@ -1,4 +1,4 @@
-﻿//========= Copyright 2016-2019, HTC Corporation. All rights reserved. ===========
+﻿//========= Copyright 2016-2018, HTC Corporation. All rights reserved. ===========
 
 using HTC.UnityPlugin.Utility;
 using System;
@@ -34,11 +34,6 @@ namespace HTC.UnityPlugin.VRModuleManagement
         ViveFocusFinch,
         OculusGoController,
         OculusGearVrController,
-        WMRHMD,
-        WMRControllerLeft,
-        WMRControllerRight,
-        ViveCosmosControllerLeft,
-        ViveCosmosControllerRight,
     }
 
     public enum VRModuleRawButton
@@ -52,35 +47,22 @@ namespace HTC.UnityPlugin.VRModuleManagement
         DPadDown = 6,
         A = 7,
         ProximitySensor = 31,
-        DashboardBack = 2, // Grip
-        Touchpad = 32, // Axis0
-        Trigger = 33, // Axis1
-        CapSenseGrip = 34, // Axis2
-
-        // alias
         Axis0 = 32,
         Axis1 = 33,
         Axis2 = 34,
         Axis3 = 35,
         Axis4 = 36,
+
+        // alias
+        DashboardBack = 2, // Grip
+        Touchpad = 32, // Axis0
+        Trigger = 33, // Axis1
+        CapSenseGrip = 34, // Axis2
     }
 
     public enum VRModuleRawAxis
     {
-        TouchpadX = Axis0X,
-        TouchpadY = Axis0Y,
-        Trigger = Axis1X,
-        CapSenseGrip = Axis2X,
-        IndexCurl = Axis3X,
-        MiddleCurl = Axis3Y,
-        RingCurl = Axis4X,
-        PinkyCurl = Axis4Y,
-
-        JoystickX = Axis2X,
-        JoystickY = Axis2Y,
-
-        // alias
-        Axis0X = 0,
+        Axis0X,
         Axis0Y,
         Axis1X,
         Axis1Y,
@@ -90,18 +72,16 @@ namespace HTC.UnityPlugin.VRModuleManagement
         Axis3Y,
         Axis4X,
         Axis4Y,
-    }
 
-    public enum VRModuleInput2DType
-    {
-        None,
-        Unknown,
-        TouchpadOnly,
-        ThumbstickOnly,
-        Both,
-
-        TrackpadOnly = TouchpadOnly,
-        JoystickOnly = ThumbstickOnly,
+        // alias
+        TouchpadX = Axis0X,
+        TouchpadY = Axis0Y,
+        Trigger = Axis1X,
+        CapSenseGrip = Axis2X,
+        IndexCurl = Axis3X,
+        MiddleCurl = Axis3Y,
+        RingCurl = Axis4X,
+        PinkyCurl = Axis4Y,
     }
 
     public interface IVRModuleDeviceStateRW
@@ -112,7 +92,6 @@ namespace HTC.UnityPlugin.VRModuleManagement
         string renderModelName { get; set; }
         VRModuleDeviceClass deviceClass { get; set; }
         VRModuleDeviceModel deviceModel { get; set; }
-        VRModuleInput2DType input2DType { get; set; }
 
         bool isConnected { get; set; }
         bool isPoseValid { get; set; }
@@ -148,7 +127,6 @@ namespace HTC.UnityPlugin.VRModuleManagement
         string renderModelName { get; }
         VRModuleDeviceClass deviceClass { get; }
         VRModuleDeviceModel deviceModel { get; }
-        VRModuleInput2DType input2DType { get; }
 
         bool isConnected { get; }
         bool isPoseValid { get; }
@@ -184,8 +162,6 @@ namespace HTC.UnityPlugin.VRModuleManagement
             private VRModuleDeviceClass m_deviceClass;
             [SerializeField]
             private VRModuleDeviceModel m_deviceModel;
-            [SerializeField]
-            private VRModuleInput2DType m_input2DType;
 
             [SerializeField]
             private bool m_isPoseValid;
@@ -213,7 +189,6 @@ namespace HTC.UnityPlugin.VRModuleManagement
             public string renderModelName { get { return m_renderModelName; } set { m_renderModelName = value; } }
             public VRModuleDeviceClass deviceClass { get { return m_deviceClass; } set { m_deviceClass = value; } }
             public VRModuleDeviceModel deviceModel { get { return m_deviceModel; } set { m_deviceModel = value; } }
-            public VRModuleInput2DType input2DType { get { return m_input2DType; } set { m_input2DType = value; } }
             // device pose state
             public bool isPoseValid { get { return m_isPoseValid; } set { m_isPoseValid = value; } }
             public bool isConnected { get { return m_isConnected; } set { m_isConnected = value; } }
@@ -228,11 +203,11 @@ namespace HTC.UnityPlugin.VRModuleManagement
 
             // device input state
             [SerializeField]
-            private ulong m_buttonPressed;
+            public ulong m_buttonPressed;
             [SerializeField]
-            private ulong m_buttonTouched;
+            public ulong m_buttonTouched;
             [SerializeField]
-            private float[] m_axisValue;
+            public float[] m_axisValue;
 
             public ulong buttonPressed { get { return m_buttonPressed; } set { m_buttonPressed = value; } }
             public ulong buttonTouched { get { return m_buttonTouched; } set { m_buttonTouched = value; } }
@@ -261,7 +236,6 @@ namespace HTC.UnityPlugin.VRModuleManagement
                 m_renderModelName = state.m_renderModelName;
                 m_deviceClass = state.m_deviceClass;
                 m_deviceModel = state.m_deviceModel;
-                m_input2DType = state.m_input2DType;
 
                 m_isPoseValid = state.m_isPoseValid;
                 m_isConnected = state.m_isConnected;
@@ -281,7 +255,6 @@ namespace HTC.UnityPlugin.VRModuleManagement
             public void Reset()
             {
                 deviceClass = VRModuleDeviceClass.Invalid;
-                input2DType = VRModuleInput2DType.None;
                 serialNumber = string.Empty;
                 modelNumber = string.Empty;
                 renderModelName = string.Empty;

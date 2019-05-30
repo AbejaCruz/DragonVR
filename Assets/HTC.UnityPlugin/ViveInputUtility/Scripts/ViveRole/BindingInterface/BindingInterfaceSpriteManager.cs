@@ -1,4 +1,4 @@
-﻿//========= Copyright 2016-2019, HTC Corporation. All rights reserved. ===========
+﻿//========= Copyright 2016-2018, HTC Corporation. All rights reserved. ===========
 
 using HTC.UnityPlugin.VRModuleManagement;
 using System.Collections.Generic;
@@ -75,6 +75,7 @@ namespace HTC.UnityPlugin.Vive.BindingInterface
 
         public static void SetupTrackingDeviceIcon(Image image, IVRModuleDeviceState deviceState, bool bound)
         {
+            VRModuleDeviceModel deviceModel;
             string spriteName;
             var scale = Vector3.one;
             switch (deviceState.deviceModel)

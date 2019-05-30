@@ -1,13 +1,10 @@
-﻿//========= Copyright 2016-2019, HTC Corporation. All rights reserved. ===========
+﻿//========= Copyright 2016-2018, HTC Corporation. All rights reserved. ===========
 
 using HTC.UnityPlugin.Pointer3D;
 using HTC.UnityPlugin.VRModuleManagement;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-#if VIU_STEAMVR_2_0_0_OR_NEWER
-using Valve.VR;
-#endif
 
 namespace HTC.UnityPlugin.Vive
 {
@@ -115,7 +112,7 @@ namespace HTC.UnityPlugin.Vive
 
         public IEnumerator StartTeleport(Vector3 position, float duration)
         {
-#if VIU_STEAMVR && !VIU_STEAMVR_2_0_0_OR_NEWER
+#if VIU_STEAMVR
             var halfDuration = Mathf.Max(0f, duration * 0.5f);
 
             if (VRModule.activeModule == VRModuleActiveEnum.SteamVR && !Mathf.Approximately(halfDuration, 0f))
